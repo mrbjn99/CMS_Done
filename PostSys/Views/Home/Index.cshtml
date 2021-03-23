@@ -1,0 +1,1061 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!--Admin Interface-->
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+	<!DOCTYPE html>
+	<html lang="en">
+
+	<head>
+		<title>CMS Dashboard</title>
+		<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 11]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!-- Favicon  -->
+		<link rel="icon" href="~/images/customer - logo.png">
+		<!-- fontawesome icon -->
+		<link rel="stylesheet" href="~/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+		<!-- animation css -->
+		<link rel="stylesheet" href="~/assets/plugins/animation/css/animate.min.css">
+		<!-- vendor css -->
+		<link rel="stylesheet" href="~/assets/css/style.css">
+	</head>
+
+	<body>
+		<!-- [ Animate ] start -->
+		<div class="loader-bg">
+			<div class="loader-track">
+				<div class="loader-fill"></div>
+			</div>
+		</div>
+		<!-- [ Animate ] End -->
+		<!-- Preloader -->
+		<div class="spinner-wrapper">
+			<div class="spinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+		<!-- end of preloader -->
+		<!-- [ navigation menu ] start -->
+		<nav class="pcoded-navbar">
+			<div class="navbar-wrapper">
+					<div class="navbar-content scroll-div" style="overflow: hidden; width: 100%; height: calc(100vh - 70px);">
+						<div class="navbar-brand header-logo">
+							<a href="~/Home/Index" class="b-brand">
+								<div class="b-bg">
+									<i class="feather icon-circle"></i>
+								</div>
+								<span class="b-title">CMS</span>
+							</a>
+							<a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+						</div>
+						<div class="navbar-content scroll-div">
+							<ul class="nav pcoded-inner-navbar">
+								<li class="nav-item pcoded-trigger">
+									<a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
+								</li>
+								<li class="nav-item pcoded-menu-caption">
+									<label>Admin Features</label>
+								</li>
+								<li>
+									<a href="~/Account/Register" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-plus"></i></span><span class="pcoded-mtext">Create New Account</span></a>
+								</li>
+								<li>
+									<a href="~/Admins/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-list"></i></span><span class="pcoded-mtext">List Accounts</span></a>
+								</li>
+							</ul>
+							<ul class="nav pcoded-inner-navbar">
+								<li class="nav-item pcoded-menu-caption">
+									<label>Login as: Admin</label>
+								</li>
+								<li>
+									<a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
+								</li>
+								@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
+								{
+
+									<li>
+										@Html.AntiForgeryToken()
+										<a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
+									</li>
+								}
+							</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<!-- [ navigation menu ] end -->
+		<!-- [ Header ] start -->
+		<header class="navbar pcoded-header navbar-expand-lg navbar-light">
+			<div class="m-header">
+				<a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+				<a href="index.html" class="b-brand">
+					<div class="b-bg">
+						<i class="feather icon-trending-up"></i>
+					</div>
+					<span class="b-title">CMS</span>
+				</a>
+			</div>
+			<a class="mobile-menu" id="mobile-header" href="javascript:">
+				<i class="feather icon-more-horizontal"></i>
+			</a>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+				</ul>
+			</div>
+		</header>
+		<!-- [ Header ] end -->
+		<!-- [ Main Content ] start -->
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<div class="pcoded-content">
+					<div class="pcoded-inner-content">
+						<!-- [ breadcrumb ] start -->
+						<div class="page-header">
+							<div class="page-block">
+								<div class="row align-items-center">
+									<div class="col-md-12">
+										<ul class="breadcrumb">
+											<li class="breadcrumb-item"><a href="~/Home/Index"><i class="feather icon-home"></i></a></li>
+										</ul>
+										<div class="page-header-title">
+											<h2 class="m-b-10">
+												@Html.DisplayName("Welcome back,  " + User.Identity.GetUserName() + "!")
+											</h2>
+										</div>
+										<br />
+										<br />
+										<br />
+										<br />
+										<div class="row">
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://media.wired.com/photos/5e754badca6a510009874664/master/pass/OpEd-Bill-Gates-1183210445.jpg" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>Bill Gates - Co-Founder of Microsoft</strong></h5>
+													</div>
+													<div class="card-body">
+														<p class="card-text">
+															“It’s fine to celebrate success but it is more important to heed the lessons of failure.”
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://cafebiz.cafebizcdn.vn/2017/photo-1-1488915659086.jpg" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>Mark Zuckerberg - Co-Founder of Facebook</strong></h5>
+													</div>
+													<div class="card-body">
+														<p class="card-text">
+															“The biggest risk is not taking any risk…
+															In a world that’s changing really quickly, the only strategy that is guaranteed to fail, is not taking risks.”
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://vnwriter.net/wp-content/uploads/2016/10/jack-ma.jpg" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>Jack Ma - Founder of Alibaba</strong></h5>
+													</div>
+													<div class="card-body">
+														<p class="card-text">
+															“Customers should be number one, Emplojayees number two, and then only your Shareholders come at number three.”
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+						<!-- [ breadcrumb ] end -->
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!-- [ Main Content ] end -->
+		<!-- Required Js -->
+		<script src="~/assets/js/vendor-all.min.js"></script>
+		<script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="~/assets/js/pcoded.min.js"></script>
+	</body>
+</html>
+}
+
+<!--Student Interface-->
+
+@if (Request.IsAuthenticated && User.IsInRole("Student"))
+{
+	<html lang="en">
+	<head>
+		<title>CMS Dashboard</title>
+		<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 11]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!-- Favicon  -->
+		<link rel="icon" href="~/images/customer - logo.png">
+		<!-- fontawesome icon -->
+		<link rel="stylesheet" href="~/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+		<!-- animation css -->
+		<link rel="stylesheet" href="~/assets/plugins/animation/css/animate.min.css">
+		<!-- vendor css -->
+		<link rel="stylesheet" href="~/assets/css/style.css">
+	</head>
+
+	<body>
+		<!-- [ Animate ] start -->
+		<div class="loader-bg">
+			<div class="loader-track">
+				<div class="loader-fill"></div>
+			</div>
+		</div>
+		<!-- [ Animate ] End -->
+		<!-- Preloader -->
+		<div class="spinner-wrapper">
+			<div class="spinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+		<!-- end of preloader -->
+		<!-- [ navigation menu ] start -->
+		<nav class="pcoded-navbar">
+			<div class="navbar-wrapper">
+				<div class="navbar-brand header-logo">
+					<a href="~/Home/Index" class="b-brand">
+						<div class="b-bg">
+							<i class="feather icon-circle"></i>
+						</div>
+						<span class="b-title">CMS</span>
+					</a>
+					<a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+				</div>
+				<div class="navbar-content scroll-div">
+					<ul class="nav pcoded-inner-navbar">
+						<li class="nav-item pcoded-trigger">
+							<a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
+						</li>
+						<li class="nav-item pcoded-menu-caption">
+							<label>Student Features</label>
+						</li>
+
+
+						<li class="">
+							<a href="~/Classes/ListClasses" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-plus"></i></span><span class="pcoded-mtext">List Classes</span></a>
+						</li>
+
+						<li class="nav-item pcoded-hasmenu">
+							<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">Manage</span></a>
+							<ul class="pcoded-submenu">
+								<li class="">
+									<a href="~/Courses/ManageMyCourse" class="nav-link "><span class="pcoded-mtext">Manage My Course</span></a>
+								</li>
+								<li class="">
+									<a href="~/Assignments/ManageMyAssignment" class="nav-link "><span class="pcoded-mtext">Submit Assignment</span></a>
+								</li>
+								<li class="">
+									<a href="~/Posts/ManageMyPost" class="nav-link "><span class="pcoded-mtext">Manage My Post</span></a>
+								</li>
+
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav pcoded-inner-navbar">
+						<li class="nav-item pcoded-menu-caption">
+							<label>Login as: Student</label>
+						</li>
+						<li>
+							<a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
+						</li>
+						@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
+						{
+
+							<li>
+								@Html.AntiForgeryToken()
+								<a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- [ navigation menu ] end -->
+		<!-- [ Header ] start -->
+		<header class="navbar pcoded-header navbar-expand-lg navbar-light">
+			<div class="m-header">
+				<a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+				<a href="~/Home/Index" class="b-brand">
+					<div class="b-bg">
+						<i class="feather icon-trending-up"></i>
+					</div>
+					<span class="b-title">CMS</span>
+				</a>
+			</div>
+			<a class="mobile-menu" id="mobile-header" href="javascript:">
+				<i class="feather icon-more-horizontal"></i>
+			</a>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+				</ul>
+			</div>
+		</header>
+		<!-- [ Header ] end -->
+		<!-- [ Main Content ] start -->
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<div class="pcoded-content">
+					<div class="pcoded-inner-content">
+						<!-- [ breadcrumb ] start -->
+						<div class="page-header">
+							<div class="page-block">
+								<div class="row align-items-center">
+									<div class="col-md-12">
+										<ul class="breadcrumb">
+											<li class="breadcrumb-item"><a href="~/Home/Index"><i class="feather icon-home"></i></a></li>
+										</ul>
+										<div class="page-header-title">
+											<h2 class="m-b-10">
+												@Html.DisplayName("Welcome,  " + User.Identity.GetUserName() + "!")
+											</h2>
+										</div>
+
+										<br />
+										<br />
+										<br />
+										<br />
+										<div class="row">
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://cdn-news.warriortrading.com/wp-content/uploads/2018/08/19180558/Elon-Musk-1-e1534867281303.jpg" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>Elon Musk - Founder of PayPal and Tesla</strong></h5>
+													</div>
+													<div class="card-body">
+														<p class="card-text">
+															“The problem is that at a lot of big companies, process becomes a substitute for thinking. You're encouraged to behave like a little gear in a complex machine. Frankly, it allows you to keep people who aren't that smart, who aren't that creative. “
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://cafebiz.cafebizcdn.vn/thumb_w/600/2018/5/29/photo1527595232047-15275952320491965790175.jpg" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>Steve Job - Founder of Apple</strong></h5>
+													</div>
+													<div class="card-body">
+														<p class="card-text">
+															"Stay hungry, stay foolish"
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://genk.mediacdn.vn/2017/11-1497857310810.jpg" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>Marissa Mayer - President and CEO of Yahoo!</strong></h5>
+													</div>
+													<div class="card-body">
+														<blockquote class="blockquote">
+															<p class="mb-2">
+																"You can't have everything you want, but you can have the things that really matter to you."
+																<footer class="blockquote-footer">Marissa Mayer</footer>
+															</p>
+														</blockquote>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- [ Main Content ] end -->
+		<!-- Required Js -->
+		<script src="~/assets/js/vendor-all.min.js"></script>
+		<script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="~/assets/js/pcoded.min.js"></script>
+	</body>
+</html>
+}
+
+<!--Marketing Manager Interface-->
+
+@if (Request.IsAuthenticated && User.IsInRole("Marketing Manager"))
+{
+	<html lang="en">
+
+	<head>
+		<title>CMS Dashboard</title>
+		<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 11]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!-- Favicon  -->
+		<link rel="icon" href="~/images/customer - logo.png">
+		<!-- fontawesome icon -->
+		<link rel="stylesheet" href="~/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+		<!-- animation css -->
+		<link rel="stylesheet" href="~/assets/plugins/animation/css/animate.min.css">
+		<!-- vendor css -->
+		<link rel="stylesheet" href="~/assets/css/style.css">
+	</head>
+
+	<body>
+		<!-- [ Animate ] start -->
+		<div class="loader-bg">
+			<div class="loader-track">
+				<div class="loader-fill"></div>
+			</div>
+		</div>
+		<!-- [ Animate ] End -->
+		<!-- Preloader -->
+		<div class="spinner-wrapper">
+			<div class="spinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+		<!-- end of preloader -->
+		<!-- [ navigation menu ] start -->
+		<nav class="pcoded-navbar">
+			<div class="navbar-wrapper">
+				<div class="navbar-brand header-logo">
+					<a href="~/Home/Index" class="b-brand">
+						<div class="b-bg">
+							<i class="feather icon-circle"></i>
+						</div>
+						<span class="b-title">CMS</span>
+					</a>
+					<a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+				</div>
+				<div class="navbar-content scroll-div">
+					<ul class="nav pcoded-inner-navbar">
+						<li>
+							<a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
+						</li>
+						<li class="nav-item pcoded-menu-caption">
+							<label>Marketing Manager Features</label>
+						</li>
+
+						<li class="nav-item pcoded-hasmenu">
+							<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">Manage</span></a>
+							<ul class="pcoded-submenu">
+								<li>
+									<a href="~/Faculties/CreateFaculty" class="nav-link "><span class="pcoded-mtext">Create Faculties</span></a>
+								</li>
+								<li>
+									<a href="~/Classes/CreateClass" class="nav-link "><span class="pcoded-mtext">Create Classes</span></a>
+								</li>
+								<li>
+									<a href="~/GuestZones/CreateGuest" class="nav-link "><span class="pcoded-mtext">Create Guests</span></a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item pcoded-hasmenu">
+							<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">List</span></a>
+							<ul class="pcoded-submenu">
+								<li>
+									<a href="~/GuestZones/ListGuest" class="nav-link "><span class="pcoded-mtext">List Guests</span></a>
+								</li>
+								<li>
+									<a href="~/Faculties/ListFaculty" class="nav-link "><span class="pcoded-mtext">List Faculties</span></a>
+								</li>
+								<li>
+									<a href="~/Classes/ListClasses" class="nav-link "><span class="pcoded-mtext">List Classes</span></a>
+								</li>
+								<li>
+									<a href="~/Courses/ListCourses" class="nav-link "><span class="pcoded-mtext">List Courses</span></a>
+								</li>
+								<li>
+									<a href="~/Assignments/ListAssignment" class="nav-link "><span class="pcoded-mtext">List Assignments</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ListPost" class="nav-link "><span class="pcoded-mtext">List Posts</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ListComment" class="nav-link "><span class="pcoded-mtext">List Comments</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ListPublication" class="nav-link "><span class="pcoded-mtext">List Publications</span></a>
+								</li>
+								<li>
+									<a href="~/Deadlines/ListDeadline" class="nav-link "><span class="pcoded-mtext">List Deadlines</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="~/Dashboards/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span><span class="pcoded-mtext">Charts</span></a>
+						</li>
+						<li>
+							<a href="~/Posts/DownloadZip" class="nav-link "><span class="pcoded-micon"><i class="feather icon-download"></i></span><span class="pcoded-mtext">Download File (Zip)</span></a>
+						</li>
+					</ul>
+					<ul class="nav pcoded-inner-navbar">
+						<li class="nav-item pcoded-menu-caption">
+							<label>Login as: Marketing Manager</label>
+						</li>
+						<li>
+							<a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
+						</li>
+						@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
+						{
+
+							<li>
+								@Html.AntiForgeryToken()
+								<a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- [ navigation menu ] end -->
+		<!-- [ Header ] start -->
+		<header class="navbar pcoded-header navbar-expand-lg navbar-light">
+			<div class="m-header">
+				<a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+				<a href="~/Home/Index" class="b-brand">
+					<div class="b-bg">
+						<i class="feather icon-circle"></i>
+					</div>
+					<span class="b-title">CMS</span>
+				</a>
+			</div>
+			<a class="mobile-menu" id="mobile-header" href="javascript:">
+				<i class="feather icon-more-horizontal"></i>
+			</a>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+				</ul>
+			</div>
+		</header>
+		<!-- [ Header ] end -->
+		<!-- [ Main Content ] start -->
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<div class="pcoded-content">
+					<div class="pcoded-inner-content">
+						<!-- [ breadcrumb ] start -->
+						<div class="page-header">
+							<div class="page-block">
+								<div class="row align-items-center">
+									<div class="col-md-12">
+										<ul class="breadcrumb">
+											<li class="breadcrumb-item"><a href="~/Home/Index"><i class="feather icon-home"></i></a></li>
+										</ul>
+										<div class="page-header-title">
+											<h1 class="m-b-10">
+												@Html.DisplayName("Welcome,  " + User.Identity.GetUserName() + "!")
+											</h1>
+										</div>
+										<br />
+										<br />
+										<br />
+										<br />
+										<div class="row">
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://cdn.vietnambiz.vn/stores/news_dataimages/xuanlh/042018/07/06/4841_sherylsandberg2501-15230546629081131619948.jpg" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>Sheryl Sandberg - CEO of Lean In.</strong></h5>
+													</div>
+													<div class="card-body">
+														<p class="card-text">
+															"If you're offered a seat on a rocket ship, don't ask what seat."
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://vcdn1-sohoa.vnecdn.net/2013/01/18/larry-page-jpg-1358504543.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=PwT-63u7JzUPI6CLbqwNVw" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>Larry Page - co-founder Google</strong></h5>
+													</div>
+													<div class="card-body">
+														<p class="card-text">
+															"We want to build technology that everybody loves using, and that affects everyone. We want to create beautiful, intuitive services and technologies that are so incredibly useful that people use them twice a day. Like they use a toothbrush. There aren't that many things people use twice a day."
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-4">
+												<div class="card">
+													<img src="https://images.livemint.com/img/2019/10/28/600x338/AU11532_1572248144142.jpg" alt="Lamp">
+													<div class="card-header">
+														<h5><strong>John Chambers - CEO of Cisco</strong></h5>
+													</div>
+													<div class="card-body">
+														<p class="card-text">
+															“If you don't innovate fast, disrupt your industry, disrupt yourself, you'll be left behind.”
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- [ breadcrumb ] end -->
+		<!-- [ Main Content ] end -->
+		<!-- Required Js -->
+		<script src="~/assets/js/vendor-all.min.js"></script>
+		<script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="~/assets/js/pcoded.min.js"></script>
+	</body>
+</html>
+}
+
+<!-- Guest Interface -->
+
+@if (Request.IsAuthenticated && User.IsInRole("Guest"))
+{
+	<html lang="en">
+
+	<head>
+		<title>CMS Dashboard</title>
+		<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 11]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!-- Favicon  -->
+		<link rel="icon" href="~/images/customer - logo.png">
+		<!-- fontawesome icon -->
+		<link rel="stylesheet" href="~/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+		<!-- animation css -->
+		<link rel="stylesheet" href="~/assets/plugins/animation/css/animate.min.css">
+		<!-- vendor css -->
+		<link rel="stylesheet" href="~/assets/css/style.css">
+	</head>
+
+	<body>
+		<!-- [ Animate ] start -->
+		<div class="loader-bg">
+			<div class="loader-track">
+				<div class="loader-fill"></div>
+			</div>
+		</div>
+		<!-- [ Animate ] End -->
+		<!-- Preloader -->
+		<div class="spinner-wrapper">
+			<div class="spinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+		<!-- end of preloader -->
+		<!-- [ navigation menu ] start -->
+		<nav class="pcoded-navbar">
+			<div class="navbar-wrapper">
+				<div class="navbar-brand header-logo">
+					<a href="~/Home/Index" class="b-brand">
+						<div class="b-bg">
+							<i class="feather icon-circle"></i>
+						</div>
+						<span class="b-title">CMS</span>
+					</a>
+					<a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+				</div>
+				<div class="navbar-content scroll-div">
+					<ul class="nav pcoded-inner-navbar">
+						<li class="nav-item pcoded-trigger">
+							<a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
+						</li>
+						<li class="nav-item pcoded-menu-caption">
+							<label>Guest Features</label>
+						</li>
+						<li>
+							<a href="~/GuestZones/GuestZoneFaculty" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Guest's Faculties</span></a>
+						</li>
+					</ul>
+					<ul class="nav pcoded-inner-navbar">
+						<li class="nav-item pcoded-menu-caption">
+							<label>Login as: Guest</label>
+						</li>
+						<li>
+							<a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
+						</li>
+						@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
+						{
+
+							<li>
+								@Html.AntiForgeryToken()
+								<a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- [ navigation menu ] end -->
+		<!-- [ Header ] start -->
+		<header class="navbar pcoded-header navbar-expand-lg navbar-light">
+			<div class="m-header">
+				<a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+				<a href="~/Home/Index" class="b-brand">
+					<div class="b-bg">
+						<i class="feather icon-circle"></i>
+					</div>
+					<span class="b-title">CMS</span>
+				</a>
+			</div>
+			<a class="mobile-menu" id="mobile-header" href="javascript:">
+				<i class="feather icon-more-horizontal"></i>
+			</a>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+				</ul>
+			</div>
+		</header>
+		<!-- [ Header ] end -->
+		<!-- [ Main Content ] start -->
+		<!-- [ Main Content ] start -->
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<div class="pcoded-content">
+					<div class="pcoded-inner-content">
+						<!-- [ breadcrumb ] end -->
+						<div class="main-body">
+							<div class="page-wrapper">
+								<!-- [ Main Content ] start -->
+								<div class="page-header-title">
+									<h2 class="m-b-10">
+										@Html.DisplayName("Welcome back,  " + User.Identity.GetUserName() + "!")
+									</h2>
+								</div>
+								<br />
+								<br />
+								<br />
+								<br />
+								<div class="row">
+									<div class="col-md-6 col-lg-4">
+										<div class="card">
+											<img src="https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2015/6/9/1433860888503/Albert-Einstein.--009.jpg?width=700&quality=85&auto=format&fit=max&s=7804fb911e4c946d1baeb856483a85ed" alt="Lamp">
+											<div class="card-header">
+												<h5><strong>Albert Einstein - Scientist</strong></h5>
+											</div>
+											<div class="card-body">
+												<p class="card-text">
+													“It has become appallingly obvious that our technology has exceeded our humanity.”
+												</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="card">
+											<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMZs3Fypy6RddpCQI7OkeQZC1w-jPlewCJMvkm9TC90Cqh_ZGz2yCr_bf9ya7W9M8-YMk&usqp=CAU" alt="Lamp">
+											<div class="card-header">
+												<h5><strong>Jeff Bezos - Founder of Amazon</strong></h5>
+											</div>
+											<div class="card-body">
+												<p class="card-text">
+													“If you're competitor-focused, you have to wait until there is a competitor doing something. Being customer-focused allows you to be more pioneering.”
+												</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="card">
+											<img src="https://www.crn.com/resources/0261-1048115c39de-3b044cd7b03b-1000/larry-ellison-openworld-2018.jpg" alt="Lamp">
+											<div class="card-header">
+												<h5><strong>Larry Ellison - Founder of Oracle</strong></h5>
+											</div>
+											<div class="card-body">
+												<p class="card-text">
+													“Taking care of your employees is extremely important and very, very visible.”
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- [ Main Content ] end -->
+		<!-- Required Js -->
+		<script src="~/assets/js/vendor-all.min.js"></script>
+		<script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="~/assets/js/pcoded.min.js"></script>
+	</body>
+</html>
+}
+
+<!-- Marketing Coordinator Interface -->
+
+@if (Request.IsAuthenticated && User.IsInRole("Marketing Coordinator"))
+{
+	<html lang="en">
+
+	<head>
+		<title>CMS Dashboard</title>
+		<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 11]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!-- Favicon  -->
+		<link rel="icon" href="~/images/customer - logo.png">
+		<!-- fontawesome icon -->
+		<link rel="stylesheet" href="~/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+		<!-- animation css -->
+		<link rel="stylesheet" href="~/assets/plugins/animation/css/animate.min.css">
+		<!-- vendor css -->
+		<link rel="stylesheet" href="~/assets/css/style.css">
+	</head>
+
+	<body>
+		<!-- [ Animate ] start -->
+		<div class="loader-bg">
+			<div class="loader-track">
+				<div class="loader-fill"></div>
+			</div>
+		</div>
+		<!-- [ Animate ] End -->
+		<!-- Preloader -->
+		<div class="spinner-wrapper">
+			<div class="spinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+		<!-- end of preloader -->
+		<!-- [ navigation menu ] start -->
+		<nav class="pcoded-navbar">
+			<div class="navbar-wrapper">
+				<div class="navbar-brand header-logo">
+					<a href="~/Home/Index" class="b-brand">
+						<div class="b-bg">
+							<i class="feather icon-circle"></i>
+						</div>
+						<span class="b-title">CMS</span>
+					</a>
+					<a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+				</div>
+				<div class="navbar-content scroll-div">
+					<ul class="nav pcoded-inner-navbar">
+						<li>
+							<a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
+						</li>
+						<li class="nav-item pcoded-menu-caption">
+							<label>Marketing Coordinator Features</label>
+						</li>
+						<li>
+							<a href="~/Deadlines/CreateDeadline" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-plus"></i></span><span class="pcoded-mtext">Create Deadline</span></a>
+						</li>
+
+						<li class="nav-item pcoded-hasmenu">
+							<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">Manage</span></a>
+							<ul class="pcoded-submenu">
+								<li>
+									<a href="~/Deadlines/ManageMyDeadline" class="nav-link "><span class="pcoded-mtext">Manage My Deadline</span></a>
+								</li>
+								<li>
+									<a href="~/Courses/ManageMyCourse" class="nav-link "><span class="pcoded-mtext">Manage My Course</span></a>
+								</li>
+
+								<li>
+									<a href="~/Assignments/ManageMyAssignment" class="nav-link "><span class="pcoded-mtext">Manage My Assignment</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ManageMyPost" class="nav-link "><span class="pcoded-mtext">Manage My Post</span></a>
+								</li>
+								<li>
+									<a href="~/Classes/ManageMyClass" class="nav-link "><span class="pcoded-mtext">Enrollment Key</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ManageMyPublication" class="nav-link "><span class="pcoded-mtext">Manage My Publication</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ManageMyComment" class="nav-link "><span class="pcoded-mtext">Manage My Comments</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="~/Dashboards/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span><span class="pcoded-mtext">Charts</span></a>
+						</li>
+						<li>
+							<a href="~/Posts/DownloadZip" class="nav-link "><span class="pcoded-micon"><i class="feather icon-download"></i></span><span class="pcoded-mtext">Download File (Zip)</span></a>
+						</li>
+					</ul>
+					<ul class="nav pcoded-inner-navbar">
+						<li class="nav-item pcoded-menu-caption">
+							<label>Login as: Marketing Coordinator</label>
+						</li>
+						<li>
+							<a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
+						</li>
+						@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
+						{
+
+							<li>
+								@Html.AntiForgeryToken()
+								<a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- [ navigation menu ] end -->
+		<!-- [ Header ] start -->
+		<header class="navbar pcoded-header navbar-expand-lg navbar-light">
+			<div class="m-header">
+				<a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+				<a href="~/Home/Index" class="b-brand">
+					<div class="b-bg">
+						<i class="feather icon-circle"></i>
+					</div>
+					<span class="b-title">CMS</span>
+				</a>
+			</div>
+			<a class="mobile-menu" id="mobile-header" href="javascript:">
+				<i class="feather icon-more-horizontal"></i>
+			</a>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+				</ul>
+			</div>
+		</header>
+		<!-- [ Header ] end -->
+		<!-- [ Main Content ] start -->
+		<!-- [ Main Content ] start -->
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<div class="pcoded-content">
+					<div class="pcoded-inner-content">
+						<!-- [ breadcrumb ] end -->
+						<div class="main-body">
+							<div class="page-wrapper">
+								<!-- [ Main Content ] start -->
+								<div class="page-header-title">
+									<h2 class="m-b-10">
+										@Html.DisplayName("Welcome back,  " + User.Identity.GetUserName() + "!")
+									</h2>
+								</div>
+								<br />
+								<br />
+								<br />
+								<br />
+								<div class="row">
+									<div class="col-md-6 col-lg-4">
+										<div class="card">
+											<img src="https://images.livemint.com/img/2019/03/06/600x338/tim_1551834795499.jpg" alt="Lamp">
+											<div class="card-header">
+												<h5><strong>Tim Berners-Lee - Inventor of the World Wide Web.</strong></h5>
+											</div>
+											<div class="card-body">
+												<p class="card-text">
+													“The Web as I envisaged it, we have not seen it yet. The future is still so much bigger than the past.”
+												</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="card">
+											<img src="https://m.wsj.net/video/20190124/ginnirometty_ibm_p1a/ginnirometty_ibm_p1a_960x540.jpg" alt="Lamp">
+											<div class="card-header">
+												<h5><strong>Ginni Rometty, CEO of IBM</strong></h5>
+											</div>
+											<div class="card-body">
+												<p class="card-text">
+													"Growth and comfort do not coexist."
+												</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="card">
+											<img src="https://cdn.cnn.com/cnnnext/dam/assets/191004080515-marc-benioff-salesforce-1003-exlarge-169.jpg" alt="Lamp">
+											<div class="card-header">
+												<h5><strong>Marc R. Benioff, CEO of SalesForce</strong></h5>
+											</div>
+											<div class="card-body">
+												<p class="card-text">
+													“Trust is a serious problem, we have to get to a new level of transparency – only through radical transparency will we get to radical new levels of trust.”
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- [ Main Content ] end -->
+		<!-- Required Js -->
+		<script src="~/assets/js/vendor-all.min.js"></script>
+		<script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="~/assets/js/pcoded.min.js"></script>
+	</body>
+</html>
+}

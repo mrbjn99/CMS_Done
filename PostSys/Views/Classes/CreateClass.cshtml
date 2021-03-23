@@ -1,0 +1,260 @@
+﻿@model PostSys.ViewModels.CoordinatorFacultyViewModel
+@{
+	ViewBag.Title = "CreateClass";
+}
+
+@using Microsoft.AspNet.Identity
+
+
+@if (Request.IsAuthenticated && User.IsInRole("Marketing Manager"))
+{
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<title>Create Class</title>
+		<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 11]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!-- Favicon  -->
+		<link rel="icon" href="~/images/customer - logo.png">
+		<!-- fontawesome icon -->
+		<link rel="stylesheet" href="~/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+		<!-- animation css -->
+		<link rel="stylesheet" href="~/assets/plugins/animation/css/animate.min.css">
+		<!-- vendor css -->
+		<link rel="stylesheet" href="~/assets/css/style.css">
+		<link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+
+	</head>
+
+	<body>
+		<!-- [ Animate ] start -->
+		<div class="loader-bg">
+			<div class="loader-track">
+				<div class="loader-fill"></div>
+			</div>
+		</div>
+		<!-- [ Animate ] End -->
+		<!-- Preloader -->
+		<div class="spinner-wrapper">
+			<div class="spinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+		<!-- end of preloader -->
+		<!-- [ navigation menu ] start -->
+		<nav class="pcoded-navbar">
+			<div class="navbar-wrapper">
+				<div class="navbar-brand header-logo">
+					<a href="~/Home/Index" class="b-brand">
+						<div class="b-bg">
+							<i class="feather icon-circle"></i>
+						</div>
+						<span class="b-title">CMS</span>
+					</a>
+					<a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+				</div>
+				<div class="navbar-content scroll-div">
+					<ul class="nav pcoded-inner-navbar">
+						<li>
+							<a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
+						</li>
+						<li class="nav-item pcoded-menu-caption">
+							<label>Marketing Manager Features</label>
+						</li>
+
+						<li class="nav-item pcoded-hasmenu">
+							<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">Manage</span></a>
+							<ul class="pcoded-submenu">
+								<li>
+									<a href="~/Faculties/CreateFaculty" class="nav-link "><span class="pcoded-mtext">Create Faculties</span></a>
+								</li>
+								<li>
+									<a href="~/Classes/CreateClass" class="nav-link "><span class="pcoded-mtext">Create Classes</span></a>
+								</li>
+								<li>
+									<a href="~/GuestZones/CreateGuest" class="nav-link "><span class="pcoded-mtext">Create Guests</span></a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item pcoded-hasmenu">
+							<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">List</span></a>
+							<ul class="pcoded-submenu">
+								<li>
+									<a href="~/GuestZones/ListGuest" class="nav-link "><span class="pcoded-mtext">List Guests</span></a>
+								</li>
+								<li>
+									<a href="~/Faculties/ListFaculty" class="nav-link "><span class="pcoded-mtext">List Faculties</span></a>
+								</li>
+								<li>
+									<a href="~/Classes/ListClasses" class="nav-link "><span class="pcoded-mtext">List Classes</span></a>
+								</li>
+								<li>
+									<a href="~/Courses/ListCourses" class="nav-link "><span class="pcoded-mtext">List Courses</span></a>
+								</li>
+								<li>
+									<a href="~/Assignments/ListAssignment" class="nav-link "><span class="pcoded-mtext">List Assignments</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ListPost" class="nav-link "><span class="pcoded-mtext">List Posts</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ListComment" class="nav-link "><span class="pcoded-mtext">List Comments</span></a>
+								</li>
+								<li>
+									<a href="~/Posts/ListPublication" class="nav-link "><span class="pcoded-mtext">List Publications</span></a>
+								</li>
+								<li>
+									<a href="~/Deadlines/ListDeadline" class="nav-link "><span class="pcoded-mtext">List Deadlines</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="~/Dashboards/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span><span class="pcoded-mtext">Charts</span></a>
+						</li>
+						<li>
+							<a href="~/Posts/DownloadZip" class="nav-link "><span class="pcoded-micon"><i class="feather icon-download"></i></span><span class="pcoded-mtext">Download File (Zip)</span></a>
+						</li>
+					</ul>
+					<ul class="nav pcoded-inner-navbar">
+						<li class="nav-item pcoded-menu-caption">
+							<label>Login as: Marketing Manager</label>
+						</li>
+						<li>
+							<a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
+						</li>
+						@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
+						{
+
+							<li>
+								@Html.AntiForgeryToken()
+								<a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- [ navigation menu ] end -->
+		<!-- [ Header ] start -->
+		<header class="navbar pcoded-header navbar-expand-lg navbar-light">
+			<div class="m-header">
+				<a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+				<a href="~/Home/Index" class="b-brand">
+					<div class="b-bg">
+						<i class="feather icon-circle"></i>
+					</div>
+					<span class="b-title">CMS</span>
+				</a>
+			</div>
+			<a class="mobile-menu" id="mobile-header" href="javascript:">
+				<i class="feather icon-more-horizontal"></i>
+			</a>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+				</ul>
+			</div>
+		</header>
+		<!-- [ Header ] end -->
+		<!-- [ Main Content ] start -->
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<div class="pcoded-content">
+					<div class="pcoded-inner-content">
+						<div class="pcoded-inner-content">
+							<!-- [ breadcrumb ] start -->
+							<div class="page-header">
+								<div class="page-block">
+									<div class="row align-items-center">
+										<div class="col-md-12">
+											<div class="page-header-title">
+												<h5 class="m-b-10">@Html.DisplayName("Welcome,  " + User.Identity.GetUserName() + "!")</h5>
+											</div>
+											<ul class="breadcrumb">
+												<li class="breadcrumb-item"><a href="~/Home/Index"><i class="feather icon-home"></i></a></li>
+												<li class="breadcrumb-item"><a href="javascript:">Create Classes</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- [ breadcrumb ] end -->
+							<!-- [ Main Content ] start -->
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="card" style="max-width:40%; margin: 0 auto; float:none; margin-bottom:10px;">
+										<div class="card-header">
+											<h5> Create Classes</h5>
+										</div>
+										<div class="card-block table-border-style" style="margin: 0 auto; float:none; margin-bottom:10px;">
+											@using (Html.BeginForm("CreateClass", "Classes", FormMethod.Post))
+											{
+												@Html.AntiForgeryToken()
+												<div class="form-group">
+													@Html.LabelFor(p => p.Class.Name)
+													@Html.TextBoxFor(p => p.Class.Name, new { @class = "form-control" })
+													@Html.ValidationMessageFor(p => p.Class.Name, "", new { @class = "text-danger" })
+												</div>
+
+												<div class="form-group">
+													@Html.LabelFor(m => m.Class.CoordinatorId)
+													@Html.DropDownListFor(m => m.Class.CoordinatorId,
+														new SelectList(Model.Coordinators, "Id", "UserName"), "Select Coordinator",
+														new { @class = "form-control" }
+													)
+												</div>
+
+												<div class="form-group">
+													@Html.LabelFor(m => m.Class.FacultyId)
+													@Html.DropDownListFor(m => m.Class.FacultyId,
+														new SelectList(Model.Faculties, "Id", "Name"), "Select Faculty",
+														new { @class = "form-control" }
+													)
+												</div>
+
+												<div class="form-group">
+													@Html.LabelFor(p => p.Class.EnrollmentKey)
+													@Html.PasswordFor(p => p.Class.EnrollmentKey, new { @class = "form-control" })
+													@Html.ValidationMessageFor(p => p.Class.EnrollmentKey, "", new { @class = "text-danger" })
+												</div>
+
+												<center><button id="sweetalert" type="submit" class="btn btn-primary">Create</button></center>
+
+												<script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
+
+												<script>
+													document.getElementById('sweetalert').onclick = function () {
+														swal("Created!", "You have successfully created!", "success");
+													};
+												</script>
+											}
+											<!-- [ Main Content ] end -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- [ Main Content ] end -->
+		<!-- Required Js -->
+		<script src="~/assets/js/vendor-all.min.js"></script>
+		<script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="~/assets/js/pcoded.min.js"></script>
+	</body>
+</html>
+}
