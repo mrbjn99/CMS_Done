@@ -122,6 +122,7 @@ namespace PostSys.Controllers
 
             return true;
 
+
         }
 
         public ActionResult SendEmailToUser()
@@ -157,7 +158,8 @@ namespace PostSys.Controllers
             result = SendEmail($"{coordinatorEmail}", "Notification Email", $"Student: {getUserName} <br> Assignemnt: {AssignmentName} <br> Course: {courseName} <br> Already submit a post");
 
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            Json(result, JsonRequestBehavior.AllowGet);
+            return View();
         }
 
         [Authorize(Roles = "Marketing Manager")]
@@ -318,15 +320,15 @@ namespace PostSys.Controllers
         }
 
         public ActionResult DetailComment(int id)
-		{
+        {
             var getUser = _context.Users.ToList();
 
-			var getComment = _context.Comments.Include(m => m.Post).Where(m => m.PostId == id)
+            var getComment = _context.Comments.Include(m => m.Post).Where(m => m.PostId == id)
                                               .ToList();
 
 
-			return View(getComment);
-		}
+            return View(getComment);
+        }
 
         [Authorize(Roles = "Marketing Coordinator")]
         public ActionResult DeleteComment(int id)

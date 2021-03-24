@@ -173,12 +173,14 @@
 
 												@Html.HiddenFor(p => p.Post.AssignmentId)
 
-												<div class="form-group">
-													@Html.LabelFor(model => model.Post.File, htmlAttributes: new { @class = "control-label col-md-2" })
-													<div class="col-md-10">
+												<div class="form-group" >
+													@Html.LabelFor(model => model.Post.File)
+													<div class="form-group">
 														<input type="file" name="File" id="File" required />
 													</div>
 												</div>
+												<br />
+
 
 												<div>
 													<input type="checkbox" id="rterms" value="Agreed-to-Terms" name="rterms" required> I agree with Terms & Conditions.
@@ -187,6 +189,7 @@
 
 												if (Model.StatusPost == 1)
 												{
+													<br />
 
 													<div type="submit">
 														<button class="btn btn-primary">Submit</button>
