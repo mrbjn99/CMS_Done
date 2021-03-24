@@ -6,8 +6,7 @@
 
 @using Microsoft.AspNet.Identity
 
-@if (Request.IsAuthenticated && User.IsInRole("Marketing Coordinator"))
-{
+
 	<!DOCTYPE html>
 	<html lang="en">
 
@@ -54,80 +53,131 @@
 		<!-- end of preloader -->
 		<!-- [ navigation menu ] start -->
 		<nav class="pcoded-navbar">
-			<div class="navbar-wrapper">
-				<div class="navbar-brand header-logo">
-					<a href="~/Home/Index" class="b-brand">
-						<div class="b-bg">
-							<i class="feather icon-circle"></i>
-						</div>
-						<span class="b-title">CMS</span>
-					</a>
-					<a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
-				</div>
-				<div class="navbar-content scroll-div">
-					<ul class="nav pcoded-inner-navbar">
-						<li>
-							<a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>Marketing Coordinator Features</label>
-						</li>
-						<li>
-							<a href="~/Deadlines/CreateDeadline" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-plus"></i></span><span class="pcoded-mtext">Create Deadline</span></a>
-						</li>
+            <div class="navbar-wrapper">
+                <div class="navbar-brand header-logo">
+                    <a href="~/Home/Index" class="b-brand">
+                        <div class="b-bg">
+                            <i class="feather icon-circle"></i>
+                        </div>
+                        <span class="b-title">CMS</span>
+                    </a>
+                    <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+                </div>
+                @if (Request.IsAuthenticated && User.IsInRole("Student"))
+                {
+                    <div class="navbar-content scroll-div">
+                        <ul class="nav pcoded-inner-navbar">
+                            <li class="nav-item pcoded-trigger">
+                                <a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
+                            </li>
+                            <li class="nav-item pcoded-menu-caption">
+                                <label>Student Features</label>
+                            </li>
 
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">Manage</span></a>
-							<ul class="pcoded-submenu">
-								<li>
-									<a href="~/Deadlines/ManageMyDeadline" class="nav-link "><span class="pcoded-mtext">Manage My Deadline</span></a>
-								</li>
-								<li>
-									<a href="~/Courses/ManageMyCourse" class="nav-link "><span class="pcoded-mtext">Manage My Course</span></a>
-								</li>
+                            <li class="">
+                                <a href="~/Classes/ListClasses" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-plus"></i></span><span class="pcoded-mtext">List Classes</span></a>
+                            </li>
 
-								<li>
-									<a href="~/Assignments/ManageMyAssignment" class="nav-link "><span class="pcoded-mtext">Manage My Assignment</span></a>
-								</li>
-								<li>
-									<a href="~/Posts/ManageMyPost" class="nav-link "><span class="pcoded-mtext">Manage My Post</span></a>
-								</li>
-								<li>
-									<a href="~/Classes/ManageMyClass" class="nav-link "><span class="pcoded-mtext">Enrollment Key</span></a>
-								</li>
-								<li>
-									<a href="~/Posts/ManageMyPublication" class="nav-link "><span class="pcoded-mtext">Manage My Publication</span></a>
-								</li>
-								<li>
-									<a href="~/Posts/ManageMyComment" class="nav-link "><span class="pcoded-mtext">Manage My Comments</span></a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="~/Dashboards/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span><span class="pcoded-mtext">Charts</span></a>
-						</li>
-						<li>
-							<a href="~/Posts/DownloadZip" class="nav-link "><span class="pcoded-micon"><i class="feather icon-download"></i></span><span class="pcoded-mtext">Download File (Zip)</span></a>
-						</li>
-					</ul>
-					<ul class="nav pcoded-inner-navbar">
-						<li class="nav-item pcoded-menu-caption">
-							<label>Login as: Marketing Coordinator</label>
-						</li>
-						<li>
-							<a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
-						</li>
-						@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
-						{
+                            <li class="nav-item pcoded-hasmenu">
+                                <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">Manage</span></a>
+                                <ul class="pcoded-submenu">
+                                    <li class="">
+                                        <a href="~/Courses/ManageMyCourse" class="nav-link "><span class="pcoded-mtext">Manage My Course</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Assignments/ManageMyAssignment" class="nav-link "><span class="pcoded-mtext">Submit Assignment</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Posts/ManageMyPost" class="nav-link "><span class="pcoded-mtext">Manage My Post</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav pcoded-inner-navbar">
+                            <li class="nav-item pcoded-menu-caption">
+                                <label>Login as: Student</label>
+                            </li>
+                            <li>
+                                <a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
+                            </li>
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
+                            {
 
-							<li>
-								@Html.AntiForgeryToken()
-								<a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
-							</li>
-						}
-					</ul>
-				</div>
-			</div>
+                                <li>
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+                @if (Request.IsAuthenticated && User.IsInRole("Marketing Coordinator"))
+                {
+                    <div class="navbar-content scroll-div">
+                        <ul class="nav pcoded-inner-navbar">
+                            <li>
+                                <a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
+                            </li>
+                            <li class="nav-item pcoded-menu-caption">
+                                <label>Marketing Coordinator Features</label>
+                            </li>
+                            <li>
+                                <a href="~/Deadlines/CreateDeadline" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-plus"></i></span><span class="pcoded-mtext">Create Deadline</span></a>
+                            </li>
+
+                            <li class="nav-item pcoded-hasmenu">
+                                <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">Manage</span></a>
+                                <ul class="pcoded-submenu">
+                                    <li>
+                                        <a href="~/Deadlines/ManageMyDeadline" class="nav-link "><span class="pcoded-mtext">Manage My Deadline</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Courses/ManageMyCourse" class="nav-link "><span class="pcoded-mtext">Manage My Course</span></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="~/Assignments/ManageMyAssignment" class="nav-link "><span class="pcoded-mtext">Manage My Assignment</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Posts/ManageMyPost" class="nav-link "><span class="pcoded-mtext">Manage My Post</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Classes/ManageMyClass" class="nav-link "><span class="pcoded-mtext">Enrollment Key</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Posts/ManageMyPublication" class="nav-link "><span class="pcoded-mtext">Manage My Publication</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Posts/ManageMyComment" class="nav-link "><span class="pcoded-mtext">Manage My Comments</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="~/Dashboards/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span><span class="pcoded-mtext">Charts</span></a>
+                            </li>
+                            <li>
+                                <a href="~/Posts/DownloadZip" class="nav-link "><span class="pcoded-micon"><i class="feather icon-download"></i></span><span class="pcoded-mtext">Download File (Zip)</span></a>
+                            </li>
+                        </ul>
+                        <ul class="nav pcoded-inner-navbar">
+                            <li class="nav-item pcoded-menu-caption">
+                                <label>Login as: Marketing Coordinator</label>
+                            </li>
+                            <li>
+                                <a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
+                            </li>
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
+                            {
+
+                                <li>
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
 		</nav>
 		<!-- [ navigation menu ] end -->
 		<!-- [ Header ] start -->
@@ -183,7 +233,7 @@
 												<h5> Manage My Comments</h5>
 											</div>
 											<div class="card-block table-border-style">
-												@using (Html.BeginForm("MyClass", "Classes", FormMethod.Get))
+												@using (Html.BeginForm("ManageMyComment", "Posts", FormMethod.Get))
 												{
 													<div class="table-responsive">
 														<table class="table table-hover">
@@ -206,10 +256,15 @@
 																		<td>@item.Description</td>
 																		<td>@item.Post.Name</td>
 																		<td>@item.Post.Assignment.Name</td>
-																		<td>@item.Post.Assignment.Course.Class.Coordinator.UserName</td>
+																		
 																		@if (User.IsInRole("Marketing Coordinator"))
 																		{
+																			<td>@item.Post.Assignment.Course.Class.Coordinator.UserName</td>
 																			<td>@Html.ActionLink("DeleteComment", "DeleteComment", new { id = item.Id })</td>
+																		}
+																		@if (User.IsInRole("Student"))
+																		{
+																			<td>@item.Post.Assignment.Course.Student.UserName</td>
 																		}
 																	</tr>
 																}
@@ -237,4 +292,3 @@
 
 	</body>
 </html>
-}
