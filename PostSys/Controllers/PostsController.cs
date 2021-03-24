@@ -285,7 +285,7 @@ namespace PostSys.Controllers
             return RedirectToAction("ManageMyComment");
         }
 
-        [Authorize(Roles = "Marketing Coordinator, Student")]
+        [Authorize(Roles = "Marketing Coordinator")]
         public ActionResult ManageMyComment()
         {
             var getCurrentUserName = User.Identity.GetUserName();
@@ -317,14 +317,16 @@ namespace PostSys.Controllers
             return View();
         }
 
-        /*public ActionResult DetailComment(int id)
+        public ActionResult DetailComment(int id)
 		{
-  
-			var getComment = _context.Comments.Include(m => m.Post).Where(m => m.PostId == id).Select(m => m.Description).ToList();
+            var getUser = _context.Users.ToList();
+
+			var getComment = _context.Comments.Include(m => m.Post).Where(m => m.PostId == id)
+                                              .ToList();
 
 
 			return View(getComment);
-		}*/
+		}
 
         [Authorize(Roles = "Marketing Coordinator")]
         public ActionResult DeleteComment(int id)

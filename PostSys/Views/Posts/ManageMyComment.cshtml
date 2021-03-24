@@ -6,37 +6,63 @@
 
 @using Microsoft.AspNet.Identity
 
+@if (User.IsInRole("Marketing Coordinator"))
+{
 
-	<!DOCTYPE html>
-	<html lang="en">
+    <!DOCTYPE html>
 
-	<head>
-		<title>My Comment</title>
-		<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 11]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-			<![endif]-->
-		<!-- Meta -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <html lang="en">
 
-		<!-- Favicon  -->
-		<link rel="icon" href="~/images/customer - logo.png">
-		<!-- fontawesome icon -->
-		<link rel="stylesheet" href="~/assets/fonts/fontawesome/css/fontawesome-all.min.css">
-		<!-- animation css -->
-		<link rel="stylesheet" href="~/assets/plugins/animation/css/animate.min.css">
-		<!-- vendor css -->
-		<link rel="stylesheet" href="~/assets/css/style.css">
 
-	</head>
+    <head>
 
-	<body>
-		<!-- [ Animate ] start -->
-		<div class="loader-bg">
+        <title>My Comment</title>
+
+        <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 11]>
+
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+            <![endif]-->
+
+        <!-- Meta -->
+
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+        <!-- Favicon  -->
+
+        <link rel="icon" href="~/images/customer - logo.png">
+
+        <!-- fontawesome icon -->
+
+        <link rel="stylesheet" href="~/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+
+        <!-- animation css -->
+
+        <link rel="stylesheet" href="~/assets/plugins/animation/css/animate.min.css">
+
+        <!-- vendor css -->
+
+        <link rel="stylesheet" href="~/assets/css/style.css">
+
+
+    </head>
+
+
+    <body>
+
+        <!-- [ Animate ] start -->
+
+        <div class="loader-bg">
 			<div class="loader-track">
 				<div class="loader-fill"></div>
 			</div>
@@ -63,56 +89,8 @@
                     </a>
                     <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
                 </div>
-                @if (Request.IsAuthenticated && User.IsInRole("Student"))
-                {
-                    <div class="navbar-content scroll-div">
-                        <ul class="nav pcoded-inner-navbar">
-                            <li class="nav-item pcoded-trigger">
-                                <a href="~/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home Page</span></a>
-                            </li>
-                            <li class="nav-item pcoded-menu-caption">
-                                <label>Student Features</label>
-                            </li>
+                
 
-                            <li class="">
-                                <a href="~/Classes/ListClasses" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-plus"></i></span><span class="pcoded-mtext">List Classes</span></a>
-                            </li>
-
-                            <li class="nav-item pcoded-hasmenu">
-                                <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clipboard"></i></span><span class="pcoded-mtext">Manage</span></a>
-                                <ul class="pcoded-submenu">
-                                    <li class="">
-                                        <a href="~/Courses/ManageMyCourse" class="nav-link "><span class="pcoded-mtext">Manage My Course</span></a>
-                                    </li>
-                                    <li class="">
-                                        <a href="~/Assignments/ManageMyAssignment" class="nav-link "><span class="pcoded-mtext">Submit Assignment</span></a>
-                                    </li>
-                                    <li class="">
-                                        <a href="~/Posts/ManageMyPost" class="nav-link "><span class="pcoded-mtext">Manage My Post</span></a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav pcoded-inner-navbar">
-                            <li class="nav-item pcoded-menu-caption">
-                                <label>Login as: Student</label>
-                            </li>
-                            <li>
-                                <a href="~/Home/Index" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">@Html.DisplayName("Hello " + User.Identity.GetUserName() + "!")</span></a>
-                            </li>
-                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav pcoded-inner-navbar" }))
-                            {
-
-                                <li>
-                                    @Html.AntiForgeryToken()
-                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                }
-                @if (Request.IsAuthenticated && User.IsInRole("Marketing Coordinator"))
-                {
                     <div class="navbar-content scroll-div">
                         <ul class="nav pcoded-inner-navbar">
                             <li>
@@ -176,7 +154,7 @@
                             }
                         </ul>
                     </div>
-                }
+                
             </div>
 		</nav>
 		<!-- [ navigation menu ] end -->
@@ -234,44 +212,44 @@
 											</div>
 											<div class="card-block table-border-style">
 												@using (Html.BeginForm("ManageMyComment", "Posts", FormMethod.Get))
-												{
+                                                {
 													<div class="table-responsive">
 														<table class="table table-hover">
 															<thead>
-																<tr>
-																	<th>Comment</th>
-																	<th>Posts Name</th>
-																	<th>Assignment Name</th>
-																	<th>Coordinator Name</th>
-																	@if (User.IsInRole("Marketing Coordinator"))
-																	{
-																		<th>Delete</th>
-																	}
-																</tr>
+                                                                <tr>
+                                                                    <th>Comment</th>
+                                                                    <th>Posts Name</th>
+                                                                    <th>Assignment Name</th>
+                                                                    <th>Student Name</th>
+                                                                    <th>Coordinator Name</th>
+                                                                    @if (User.IsInRole("Marketing Coordinator"))
+                                                                    {
+                                                                        <th>Delete</th>
+                                                                    }
+                                                                </tr>
 															</thead>
 															<tbody>
 																@foreach (var item in Model)
-																{
-																	<tr>
-																		<td>@item.Description</td>
-																		<td>@item.Post.Name</td>
-																		<td>@item.Post.Assignment.Name</td>
-																		
-																		@if (User.IsInRole("Marketing Coordinator"))
-																		{
-																			<td>@item.Post.Assignment.Course.Class.Coordinator.UserName</td>
-																			<td>@Html.ActionLink("DeleteComment", "DeleteComment", new { id = item.Id })</td>
-																		}
-																		@if (User.IsInRole("Student"))
-																		{
-																			<td>@item.Post.Assignment.Course.Student.UserName</td>
-																		}
-																	</tr>
-																}
+                                                                {
+                                                                <tr>
+                                                                    <td>@item.Description</td>
+                                                                    <td>@item.Post.Name</td>
+                                                                    <td>@item.Post.Assignment.Name</td>
+                                                                    <td>@item.Post.Assignment.Course.Student.UserName</td>
+
+                                                                    @if (User.IsInRole("Marketing Coordinator"))
+                                                                    {
+
+                                                                        <td>@item.Post.Assignment.Course.Class.Coordinator.UserName</td>
+                                                                        <td>@Html.ActionLink("DeleteComment", "DeleteComment", new { id = item.Id })</td>
+                                                                    }
+
+                                                                </tr>
+                                                                }
 															</tbody>
 														</table>
 													</div>
-												}
+                                                }
 
 												<!-- [ Main Content ] end -->
 											</div>
@@ -292,3 +270,4 @@
 
 	</body>
 </html>
+}
