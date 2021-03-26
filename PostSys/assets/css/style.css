@@ -8005,25 +8005,25 @@ a.btn-theme.active {
 }
 
 .btn-outline-danger {
-  color: #f44236;
-  background-color: transparent;
-  background-image: none;
-  border-color: #f44236;
+    color: #faada8;
+    background-color: transparent;
+    background-image: none;
+    border-color: #faada8;
 }
-.btn-outline-danger:hover {
-  color: #fff;
-  background-color: #f44236;
-  border-color: #f44236;
-}
-.btn-outline-danger.disabled, .btn-outline-danger:disabled {
-  color: #f44236;
-  background-color: transparent;
-}
-.btn-outline-danger:not(:disabled):not(.disabled).active, .btn-outline-danger:not(:disabled):not(.disabled):active, .show > .btn-outline-danger.dropdown-toggle {
-  color: #fff;
-  background-color: #f44236;
-  border-color: #f44236;
-}
+    .btn-outline-danger:hover {
+        color: #fff;
+        background-color: #faada8;
+        border-color: #faada8;
+    }
+    .btn-outline-danger.disabled, .btn-outline-danger:disabled {
+        color: #faada8;
+        background-color: transparent;
+    }
+    .btn-outline-danger:not(:disabled):not(.disabled).active, .btn-outline-danger:not(:disabled):not(.disabled):active, .show > .btn-outline-danger.dropdown-toggle {
+        color: #fff;
+        background-color: #faada8;
+        border-color: #faada8;
+    }
 
 .btn-outline-light {
   color: #f2f2f2;

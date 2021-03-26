@@ -155,12 +155,12 @@
 													<table class="table table-hover">
 														<thead>
 															<tr>
-																<th>UserName</th>
-																<th>Email</th>
-																<th>Role</th>
-																<th>Delete</th>
-																<th>Edit User Name</th>
-																<th>Reset Password</th>
+																<th><center>UserName</center></th>
+																<th><center>Email</center></th>
+																<th><center>Role</center></th>
+																<th><center>Delete Account</center></th>
+																<th><center>Edit User Name</center></th>
+																<th><center>Reset Password</center></th>
 															</tr>
 														</thead>
 														<tbody>
@@ -169,20 +169,20 @@
 																<tr>
 																	@if ((user.Role.Contains("Admin")) == false)
 																	{
-																		<td>@user.Username</td>
-																		<td>@user.Email</td>
-																		<td>@user.Role</td>
+																		<td><center>@user.Username</center></td>
+																		<td><center>@user.Email</center></td>
+																		<td><center>@user.Role</center></td>
 																		if ((user.Role.Contains("Marketing Manager")) == true)
 																		{
-																			<th>Blocked</th>
+																			<th><center>Blocked</center></th>
 																		}
 																		else
 																		{
-																			<td>@Html.ActionLink("Delete this account", "Delete", new { id = user.UserId })</td>
+																			<td><center>@Html.ActionLink("Delete", "Delete", new { id = user.UserId })</center></td>
 																		}
 
-																		<td>@Html.ActionLink("Edit user name", "Edit", new { id = user.UserId })</td>
-																		<td>@Html.ActionLink("Reset Password", "ChangePass", new { id = user.UserId })</td>
+																		<td><center>@Html.ActionLink("Edit", "Edit", new { id = user.UserId })</center></td>
+																		<td><center>@Html.ActionLink("Reset", "ChangePass", new { id = user.UserId })</center></td>
 																	}
 																</tr>
 															}

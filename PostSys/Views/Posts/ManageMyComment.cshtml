@@ -224,7 +224,7 @@
                                                                     <th>Coordinator Name</th>
                                                                     @if (User.IsInRole("Marketing Coordinator"))
                                                                     {
-                                                                        <th>Delete</th>
+                                                                        <th>Delete Comment</th>
                                                                     }
                                                                 </tr>
 															</thead>
@@ -241,7 +241,7 @@
                                                                     {
 
                                                                         <td>@item.Post.Assignment.Course.Class.Coordinator.UserName</td>
-                                                                        <td>@Html.ActionLink("DeleteComment", "DeleteComment", new { id = item.Id })</td>
+                                                                        <td>@Html.ActionLink("Delete", "DeleteComment", new { id = item.Id })</td>
                                                                     }
 
                                                                 </tr>

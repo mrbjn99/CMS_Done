@@ -206,7 +206,7 @@
 															<tr>
 																<th>Guest Name</th>
 																<th>Faculty Name</th>
-																<th>Delete</th>
+																<th>Delete Guest</th>
 
 
 															</tr>
@@ -217,7 +217,7 @@
 																<tr>
 																	<td>@item.Name</td>
 																	<td>@item.Faculty.Name</td>
-																	<td>@Html.ActionLink("Delete", "DeleteGuest", new { id = item.Id })</td>
+																	<td><button class="btn btn-glow-dark">@Html.ActionLink("Delete", "DeleteGuest", new { id = item.Id })</button></td>
 																</tr>
 															}
 														</tbody>

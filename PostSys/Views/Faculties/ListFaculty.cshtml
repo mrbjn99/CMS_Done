@@ -210,13 +210,13 @@
 
 
 															<div class="col-md-6 col-lg-4">
-																<div class="card">
-																	<img src="https://wallpaperaccess.com/full/141434.jpg" alt="Lamp">
+																<div class="card" style="border-radius:10%">
+																	<img src="https://wallpaperaccess.com/full/141434.jpg" alt="Lamp" style="border-radius:5%">
 																	<div class="card-body">
-																		<p class="card-text">@item.Name</p>
+																		<h4>@item.Name</h4>
 																	</div>
 																	<div class="card-footer">
-																		<p class="card-text">@Html.ActionLink("Delete", "DeleteFaculty", new { id = item.Id })</p>
+																		<center><button class="btn btn-glow-dark">@Html.ActionLink("Delete", "DeleteFaculty", new { id = item.Id })</button></center>
 
 																	</div>
 																</div>
