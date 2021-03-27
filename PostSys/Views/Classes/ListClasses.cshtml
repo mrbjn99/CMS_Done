@@ -283,12 +283,12 @@
 																	@if (User.IsInRole("Marketing Manager"))
 																	{
 																		<td>@item.EnrollmentKey</td>
-																		<td>@Html.ActionLink("Delete", "DeleteClass", new { id = item.Id })</td>
+																		<td><button class="btn btn-glow-danger">@Html.ActionLink("Delete", "DeleteClass", new { id = item.Id })</button></td>
 																	}
 																	@if (User.IsInRole("Student"))
 																	{
 																		<td>@item.Coordinator.UserName</td>
-																		<td>@Html.ActionLink("Assign", "AssignClass", new { id = item.Id })</td>
+																		<td><button class="btn btn-glow-success">@Html.ActionLink("Assign", "AssignClass", new { id = item.Id })</button></td>
 																	}
 
 																</tr>

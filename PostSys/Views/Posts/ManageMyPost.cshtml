@@ -266,17 +266,17 @@
                                                                         <td>@item.Assignment.Name</td>
                                                                         <td>@item.Assignment.Deadline.StartDate</td>
                                                                         <td>@item.Assignment.Deadline.EndDate</td>
-                                                                        <td>@Html.ActionLink("Delete", "DeletePost", new { id = item.Id })</td>
+                                                                        <td><button class="btn btn-glow-danger">@Html.ActionLink("Delete", "DeletePost", new { id = item.Id })</button></td>
                                                                         @if (User.IsInRole("Student"))
                                                                         {
-                                                                            <td>@Html.ActionLink("Download", "DownloadFile", new { id = item.Id })</td>
-                                                                            <td>@Html.ActionLink("View Comment", "DetailComment", new { id = item.Id })</td>
+                                                                            <td><button class="btn btn-glow-success">@Html.ActionLink("Download", "DownloadFile", new { id = item.Id })</button></td>
+                                                                            <td><button class="btn btn-glow-success">@Html.ActionLink("View", "DetailComment", new { id = item.Id })</button></td>
                                                                         }
 
                                                                         @if (User.IsInRole("Marketing Coordinator"))
                                                                         {
-                                                                            <td>@Html.ActionLink("Add Publication", "CreatePublication", new { id = item.Id })</td>
-                                                                            <td>@Html.ActionLink("Add Comment", "CreateComment", new { id = item.Id })</td>
+                                                                            <td><button class="btn btn-glow-success">@Html.ActionLink("Add", "CreatePublication", new { id = item.Id })</button></td>
+                                                                            <td><button class="btn btn-glow-success">@Html.ActionLink("Add", "CreateComment", new { id = item.Id })</button></td>
                                                                         }
                                                                     </tr>
                                                                 }

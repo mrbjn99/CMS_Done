@@ -203,8 +203,8 @@
 																		<td>@item.StartDate</td>
 																		<td>@item.EndDate</td>
 																		<td>@item.CreateBy</td>
-																		<td>@Html.ActionLink("Add", "AddAssignment", new { id = item.Id })</td>
-																		<td>@Html.ActionLink("Delete", "DeleteDeadline", new { id = item.Id })</td>
+																		<td><button class="btn btn-glow-success">@Html.ActionLink("Add", "AddAssignment", new { id = item.Id })</button></td>
+																		<td><button class="btn btn-glow-danger">@Html.ActionLink("Delete", "DeleteDeadline", new { id = item.Id })</button></td>
 																	</tr>
 																}
 															</tbody>

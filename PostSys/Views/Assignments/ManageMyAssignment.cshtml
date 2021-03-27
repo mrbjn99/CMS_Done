@@ -266,12 +266,12 @@
 																		<td>@item.Deadline.EndDate</td>
 																		@if (User.IsInRole("Marketing Coordinator"))
 																		{
-																			<td>@Html.ActionLink("Delete", "DeleteAssignment", new { id = item.Id })</td>
+																			<td><button class="btn btn-glow-danger">@Html.ActionLink("Delete", "DeleteAssignment", new { id = item.Id })</button></td>
 																		}
 
 																		@if (User.IsInRole("Student"))
 																		{
-																			<td>@Html.ActionLink("Submit", "SubmitPost", new { id = item.Id })</td>
+																			<td><button class="btn btn-glow-success">@Html.ActionLink("Submit", "SubmitPost", new { id = item.Id })</button></td>
 																		}
 																	</tr>
 																}

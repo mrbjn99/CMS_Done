@@ -178,11 +178,11 @@
 																		}
 																		else
 																		{
-																			<td><center>@Html.ActionLink("Delete", "Delete", new { id = user.UserId })</center></td>
+																			<td><center><button class="btn btn-glow-danger">@Html.ActionLink("Delete", "Delete", new { id = user.UserId })</button></center></td>
 																		}
 
-																		<td><center>@Html.ActionLink("Edit", "Edit", new { id = user.UserId })</center></td>
-																		<td><center>@Html.ActionLink("Reset", "ChangePass", new { id = user.UserId })</center></td>
+																		<td><center><button class="btn btn-glow-success">@Html.ActionLink("Edit", "Edit", new { id = user.UserId })</button></center></td>
+																		<td><center><button class="btn btn-glow-warning">@Html.ActionLink("Reset", "ChangePass", new { id = user.UserId })</button></center></td>
 																	}
 																</tr>
 															}
